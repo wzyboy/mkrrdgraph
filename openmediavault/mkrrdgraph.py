@@ -66,7 +66,7 @@ def load_collectd_config(plugin_name, option):
     section_found = False
     filename = os.path.join(
         openmediavault.getenv(
-            'OMV_COLLECTD_CONFIG_DIR', '/etc/collectd/collectd.conf.d'
+            'OMV_COLLECTD_CONFIG_DIR', '/etc/collectd.conf.d'
         ),
         '{}.conf'.format(plugin_name),
     )
