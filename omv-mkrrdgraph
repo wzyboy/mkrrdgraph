@@ -52,7 +52,7 @@ def main():
             '--daemon', 'unix:{}'.format(openmediavault.getenv(
                 'OMV_RRDCACHED_SOCKETFILE', '/run/rrdcached.sock')),
             '--imgformat', openmediavault.getenv(
-                'OMV_COLLECTD_RRDTOOL_GRAPH_IMGFORMAT', 'PNG'),
+                'OMV_COLLECTD_RRDTOOL_GRAPH_IMGFORMAT', 'SVG'),
             '--width', openmediavault.getenv(
                 'OMV_COLLECTD_RRDTOOL_GRAPH_WIDTH', '400'),
             '--height', openmediavault.getenv(
