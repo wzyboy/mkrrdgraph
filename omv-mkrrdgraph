@@ -68,7 +68,7 @@ def main():
                 'OMV_COLLECTD_HOSTNAME', 'localhost')),
         'image_dir': openmediavault.getenv(
             'OMV_COLLECTD_RRDTOOL_GRAPH_IMGDIR',
-            '/run/rrdgraph'),
+            '/srv/http/rrdgraph'),
         'last_update': 'Last update: {}\\r'.format(
             time.ctime()).replace(':', r'\:')
     }  # yapf: disable
