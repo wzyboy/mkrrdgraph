@@ -1,8 +1,8 @@
 #!/usr/bin/env python
 
 import sys
+import itertools
 from pathlib import Path
-from itertools import chain
 
 HEAD = '''
 <!DOCTYPE html>
@@ -10,6 +10,23 @@ HEAD = '''
 <head>
     <meta charset="UTF-8">
     <title></title>
+<style>
+.container {
+    display: flex;
+}
+
+.col {
+    padding: 1em;
+}
+
+.row {
+    width: 25vw;
+}
+
+img {
+    width: 100%;
+}
+</style>
 </head>
 <body>
     <main class="container">
@@ -30,7 +47,7 @@ def gen_row(img_path):
             <p>{filename}</p>
             <img src="{path}" />
         </div>
-    '''
+'''
 
 
 def sort_by_period(item):
@@ -50,10 +67,17 @@ def sort_by_period(item):
 
 def main():
     img_dir = sys.argv[1]
-    images = chain(Path(img_dir).glob('*.png'), Path(img_dir).glob('*.svg'))
+    images = itertools.chain(Path(img_dir).glob('*.png'), Path(img_dir).glob('*.svg'))
+    images = sorted(images, key=sort_by_period)
+
     html = HEAD
-    for i in sorted(images, key=sort_by_period):
-        html += gen_row(i)
+    for key, group in itertools.groupby(images, key=lambda x: Path(x).stem.rpartition('-')[0]):
+        images = list(group)
+        col_html = f'\n<div class="col">\n<p>{key}</p>'
+        for image in images:
+            col_html += gen_row(image)
+        col_html += '</div>\n'
+        html += col_html
     html += TAIL
     Path('index.html').write_text(html)
 
