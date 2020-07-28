@@ -19,10 +19,6 @@ HEAD = '''
     padding: 1em;
 }
 
-.row {
-    width: 25vw;
-}
-
 img {
     width: 100%;
 }
